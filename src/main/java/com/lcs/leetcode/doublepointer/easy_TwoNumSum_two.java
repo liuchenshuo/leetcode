@@ -1,6 +1,6 @@
-package com.lcs.leetcode.easy;
+package com.lcs.leetcode.doublepointer;
 
-public class TwoNumSum_two {
+public class easy_TwoNumSum_two {
     public static void main(String[] args) {
         int[] reNums = twoSum(new int[]{2, 7, 11, 15},9);
         System.out.println(reNums[0] + "-" +reNums[1]);
