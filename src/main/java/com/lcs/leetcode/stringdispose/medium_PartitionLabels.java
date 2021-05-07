@@ -5,35 +5,23 @@ import java.util.List;
 
 public class medium_PartitionLabels {
     public static void main(String[] args) {
-        System.out.println(partitionLabels("ababcbacadefegdehijhklij"));
+        int[] nums = {2, 3, 7, 9, 13, 21, 37};
+        int targetNum = 28;
+        System.out.println(findNums(targetNum, nums).toString());
     }
-    public static List<Integer> partitionLabels(String word) {
-        List<Integer> resultList = new ArrayList<>();
-        // get index list
-        // warning : can't use string.indexOf this method time is O(n)
-        int[] wordLastIndex = new int[26];
-        char[] wordChar = word.toCharArray();
-        for (int i = 0; i<wordChar.length;i++) {
-            wordLastIndex[wordChar[i] -'a'] = i;
-        }
-        int target = 0;
-        boolean weatherStart = true;
-        int startIndex = 0;
-        for (int i = 0; i < wordChar.length; i++) {
-            if (weatherStart) {
-                target = wordLastIndex[wordChar[i] - 'a'];
-                startIndex = i;
-                weatherStart = false;
+    public static List<Integer> findNums(int targetNum, int[] nums) {
+            for(int i = 0, j = nums.length - 1; i <= j ;){
+                if (nums[i] + nums[j] > targetNum) {
+                    j --;
+                } else if (nums[i] + nums[j] < targetNum) {
+                    i++;
+                } else {
+                    List<Integer> resultList = new ArrayList<>();
+                    resultList.add(i);
+                    resultList.add(j);
+                    return resultList;
+                }
             }
-            int currLast = wordLastIndex[wordChar[i] - 'a'];
-            if (currLast > target) {
-                target = currLast;
-            }
-            if (i == target) {
-                resultList.add(target - startIndex + 1);
-                weatherStart = true;
-            }
-        }
-        return resultList;
+            return null;
     }
 }

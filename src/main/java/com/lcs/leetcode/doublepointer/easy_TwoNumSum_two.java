@@ -1,23 +1,44 @@
 package com.lcs.leetcode.doublepointer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class easy_TwoNumSum_two {
     public static void main(String[] args) {
-        int[] reNums = twoSum(new int[]{2, 7, 11, 15},9);
-        System.out.println(reNums[0] + "-" +reNums[1]);
+        int[] nums = {-2, 4,-5,2 ,-6 };
+        easy_TwoNumSum_two easyTwoNumSumTwo = new easy_TwoNumSum_two();
+        System.out.println(easyTwoNumSumTwo.solution(nums));
     }
-    public static int[] twoSum(int[] numbers, int target) {
-        if (numbers == null) return null;
-        int i = 0, j = numbers.length - 1;
-        while (i < j) {
-            int sum = numbers[i] + numbers[j];
-            if (sum == target) {
-                return new int[]{i + 1, j + 1};
-            } else if (sum < target) {
-                i++;
-            } else {
-                j--;
-            }
+
+    List<Integer> maxList = new ArrayList<>();
+    List<Integer> tempList = new ArrayList<>();
+    private List<Integer> solution(int[] nums) {
+        dfs(nums, 0);
+        return maxList;
+    }
+
+    private void dfs(int[] nums, int index) {
+        if (index == nums.length) {
+            return;
         }
-        return null;
+        if (checkSum()) {
+            maxList = new ArrayList<>(tempList);
+        }
+        tempList.add(nums[index]);
+        dfs(nums, index + 1);
+        tempList.remove(tempList.size() - 1);
+        dfs(nums, index + 1);
+    }
+
+    private boolean checkSum() {
+        int currMax = 1;
+        for (Integer num : tempList) {
+            currMax *= num;
+        }
+        int max = 1;
+        for (Integer num : maxList) {
+            max *= num;
+        }
+        return currMax > max;
     }
 }

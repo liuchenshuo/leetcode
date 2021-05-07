@@ -8,6 +8,7 @@ class LeetcodeApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
